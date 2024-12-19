@@ -1,1 +1,6 @@
- 
+.form {
+  border: 1px solid gainsboro;
+  background-color: rgb(236, 231, 193);
+  border-radius: 5px;
+  padding: 10px;
+}

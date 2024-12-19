@@ -1,6 +1,7 @@
+import {useState} from 'react'
 import ContactList from './components/ContactList/ContactList';
-// import ContactForm from './components/ContactForm/ContactForm';
-// import SearchBox from './components/SearchBox/SearchBox';
+import ContactForm from './components/ContactForm/ContactForm';
+import SearchBox from './components/SearchBox/SearchBox';
 import './App.css'
 
 //initial state of the phonebook
@@ -13,14 +14,17 @@ const INITIAL_STATE= [
 
 
 function App() {
-
+  const [contacts, setContacts] = useState(INITIAL_STATE);
+  const [searchWord, setSearchWord] = useState('')
+ 
+  const visibleContacts=contacts.filter((contact)=>contact.name.toLowerCase().includes(searchWord.toLowerCase()))
 
   return (
   <div>
   <h1>Phonebook</h1>
-  {/* <ContactForm initialVal={INITIAL_STATE} /> */}
-  {/* <SearchBox /> */}
-  <ContactList initialVal={INITIAL_STATE}/>
+  <ContactForm initialVal={INITIAL_STATE} />
+  <SearchBox searchWord={searchWord} onSearch={setSearchWord} />
+  <ContactList contacts={visibleContacts}/>
 </div>
 
   )
