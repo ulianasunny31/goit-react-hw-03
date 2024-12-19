@@ -3,14 +3,14 @@ import Contact from '../Contact/Contact';
 import css from './ContactList.module.css'
 
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, deleteContact }) => {
   
     return (
   <div className={css.contactList}>
       {
                 contacts.map(({ id, name, number }) => {
        
-        { return <Contact key={id} name={name} number={number}/>}
+        { return <Contact deleteContact={deleteContact} key={id} name={name} number={number} id={id}/>}
     })
             }
     </div>

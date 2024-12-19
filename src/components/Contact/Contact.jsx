@@ -3,7 +3,7 @@ import { IoPerson } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
 import css from './Contact.module.css'
 
-const Contact = ({name, number}) => {
+const Contact = ({id, name, number, deleteContact}) => {
  
   return (
     <div className={css.contactDiv}>
@@ -12,7 +12,7 @@ const Contact = ({name, number}) => {
         <h3 className={css.contactLastHeading}><FaPhone /> {number}</h3>
       </div>
 
-      <button>Delete</button>
+      <button onClick={()=>deleteContact(id)}>Delete</button>
       
     </div>
   )

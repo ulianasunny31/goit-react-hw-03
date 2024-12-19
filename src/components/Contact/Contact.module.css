@@ -1,9 +1,10 @@
 .contactDiv {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   gap: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border: 1px solid #313131;
   border-radius: 8px;
   padding: 5px;

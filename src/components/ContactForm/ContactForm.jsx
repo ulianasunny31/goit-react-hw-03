@@ -1,22 +1,44 @@
 /* eslint-disable react/prop-types */
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field,ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid'
+import * as Yup from "yup";
 import { useId } from 'react';
 import css from './ContactForm.module.css';
 
-const ContactForm = ({ initialVal }) => {
+const validation = Yup.object().shape({
+    name: Yup.string().min(3, 'Too short!').max(50, 'Too much!').required('This is required.'),
+    number: Yup.string().min(3,'Too short!').max(50, 'Too much!').required('This is required.'),
+});
+
+const ContactForm = ({addContact}) => {
     const nameId = useId();
     const numberId = useId();
+
+
+    function handleSubmit(values, actions) {
+    
+  addContact({id:nanoid(), ...values})
+  actions.resetForm()
+    }
+    
   return (
-      <Formik initialValues={{ initialVal }} onSubmit={() => { }}>
+      <Formik
+          initialValues={{
+          name: "",
+          number: "",
+      }} onSubmit={handleSubmit}
+          validationSchema={validation}>
+        
           <Form className={css.form}>
               <div>
                 <label htmlFor={nameId}>Name</label>
-                <Field id={nameId} type='text' name='name'/>  
+                  <Field id={nameId} type='text' name='name' className={css.input}/>  
+                  <ErrorMessage name="name" component="span" />
               </div>
               <div>
                 <label htmlFor={numberId}>Number</label>
-                <Field id={numberId} type='text' name='number'/>
+                  <Field id={numberId} type='text' name='number' className={css.input}/>
+                  <ErrorMessage name="number" component="span" />
               </div>
 
               <button type='submit'>Add contact</button>

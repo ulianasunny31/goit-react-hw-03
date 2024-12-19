@@ -16,16 +16,33 @@ const INITIAL_STATE= [
 function App() {
   const [contacts, setContacts] = useState(INITIAL_STATE);
   const [searchWord, setSearchWord] = useState('')
+
+  
+
+  function addContact(newContact) {
+   setContacts([...contacts, newContact])
+  }
+
+  function deleteContact(contactID) {
+   setContacts(prev=> prev.filter(contact=>contact.id !== contactID))
+  }
  
-  const visibleContacts=contacts.filter((contact)=>contact.name.toLowerCase().includes(searchWord.toLowerCase()))
+  const visibleContacts = contacts.filter((contact) => contact.name.toLowerCase()
+    .includes(searchWord.toLowerCase()))
 
   return (
-  <div>
-  <h1>Phonebook</h1>
-  <ContactForm initialVal={INITIAL_STATE} />
-  <SearchBox searchWord={searchWord} onSearch={setSearchWord} />
-  <ContactList contacts={visibleContacts}/>
+    <>
+      <h1>Phonebook</h1>
+      <div className='app-style-div'>
+      <div className='app-style-div-two'>
+        <ContactForm addContact={addContact} />
+        <SearchBox searchWord={searchWord} onSearch={setSearchWord} />
+      </div>
+  
+  <ContactList contacts={visibleContacts} deleteContact={deleteContact}/>
 </div>
+    </>
+ 
 
   )
 }
