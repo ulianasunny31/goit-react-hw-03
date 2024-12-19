@@ -1,0 +1,16 @@
+.contactDiv {
+  display: flex;
+}
+
+.contactDiv > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactDiv h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
