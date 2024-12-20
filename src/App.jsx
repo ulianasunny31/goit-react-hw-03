@@ -3,6 +3,7 @@ import ContactList from './components/ContactList/ContactList';
 import ContactForm from './components/ContactForm/ContactForm';
 import SearchBox from './components/SearchBox/SearchBox';
 import './App.css'
+import { useEffect } from 'react';
 
 //initial state of the phonebook
 const INITIAL_STATE= [
@@ -14,10 +15,18 @@ const INITIAL_STATE= [
 
 
 function App() {
-  const [contacts, setContacts] = useState(INITIAL_STATE);
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem('contacts');
+
+    if (savedContacts !== null) return JSON.parse(savedContacts);
+    return INITIAL_STATE;
+  });
+
   const [searchWord, setSearchWord] = useState('')
 
-  
+  useEffect(() => {
+    window.localStorage.setItem('contacts', JSON.stringify(contacts))
+  },[contacts])
 
   function addContact(newContact) {
    setContacts([...contacts, newContact])
